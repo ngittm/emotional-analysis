@@ -1,21 +1,88 @@
-# アプリの要件
+# 座学パート
+
+## HelloWorld.vue
+```vue:HelloWorld.vue
+<script setup>
+const message = 'Hello World'
+</script>
+ <template>
+  <h1>{{ message }}</h1>
+</template>
+ <style>
+h1{
+  color:red;
+}
+</style>
+```
+
+## ディレクティブ
+```vue:Vue3Directive.vue
+
+<script setup>
+import { ref, computed } from 'vue'
+
+// 条件付きレンダリングのための ref を定義
+const show = ref(true)
+
+// リストレンダリングのための ref を定義
+const items = ref(['Item 1', 'Item 2', 'Item 3'])
+
+// 双方向データバインディングのための ref を定義
+const newItem = ref('')
+
+// イベントハンドリング: show の値を切り替える関数
+const toggleShow = () => {
+  show.value = !show.value
+}
+
+// イベントハンドリング: newItem の値を items に追加する関数
+const addItem = () => {
+  if (newItem.value.trim() !== '') {
+    items.value.push(newItem.value)
+    newItem.value = ''
+  }
+}
+</script>
+<template>
+  <!-- 条件付きレンダリング: show の値が true の場合に表示 -->
+  <div v-if="show">追加でリストの追加、切り替えで可視性が変わるよ!</div>
+
+  <!-- リストレンダリング: items の各要素をリストに表示 -->
+  <ul>
+    <li v-for="(item, index) in items" :key="index">{{ item }}</li>
+  </ul>
+
+  <!-- イベントハンドリング: ボタンをクリックすると toggleShow 関数が実行される -->
+  <button @click="toggleShow">切り替え</button>
+
+  <!-- 双方向データバインディング: input 要素と newItem 変数を同期させる -->
+  <input v-model="newItem" />
+
+  <!-- イベントハンドリング: ボタンをクリックすると addItem 関数が実行される -->
+  <button @click="addItem">追加</button>
+</template>
+```
+
+# 感情分析アプリ作成パート
+
+## アプリの要件
 - 短い時間でなるべくVueの基礎をおさえつつ実施できる
     - 画面数は少なくシンプルな構成に
 - APIとのリクエスト/レスポンスは実施する
 - ToDoList"以外"
 
-# 感情分析アプリの画面
+## 感情分析アプリの画面
 - テキスト入力画面　：　ユーザからの入力を受け付ける。適切にバリデーションを行う
 - 結果表示画面　：　APIからのレスポンスを表示する。結果だけではなく、ユーザの入力も同時に表示する
 
-# フォルダ構成
+## フォルダ構成
 
 今回は以下のような構成になっています。  
-どこまでコンポーネントを細かく設計するかですが、結論から言えばプロジェクトによります。  
 
+どこまでコンポーネントを細かく設計するかですが、結論から言えばプロジェクトによります。  
 例えば今回は「画面数を2にしてなるべくシンプルに」という要件に沿って、いたって標準的な構成にしました。
 しかし状況によっては1コンポーネントをボタン1つ単位にすることもあるでしょうし、APIとのやりとりを行う
-ロジックを別だしするようなことも考えられます。
+ロジックを別だしする用のフォルダを作ることも考えられます。
 
 ```
 .
@@ -60,10 +127,10 @@ src/views
 - ResultView.vue　：　PieChart.vueとFbComment.vueからなるコンポーネント。vuexからデータを取得して表示する
 - OtherView　：　その他
 
-App.vue
+src/App.vue
 - アプリ共通で使用するナビゲーションドロワーを置く
 
-main.js
+src/main.js
 - パッケージの使用を宣言する
 
 .env
