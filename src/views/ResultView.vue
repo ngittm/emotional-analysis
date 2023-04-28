@@ -2,12 +2,11 @@
 import PieChart from "@/components/PieChart.vue"
 import FbComment from "@/components/FbComment.vue"
 import {ref} from "vue"
-import {useStore} from "vuex"
+import {useStore} from "@/stores/store"
 
 const store=useStore()
-// vuexからの値読み出し
-let response = store.state.response
-const text = store.state.text
+let response = store.response
+const text = store.text
 
 const emotions = ref([])
 const comment = ref()

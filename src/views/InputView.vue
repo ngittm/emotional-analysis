@@ -2,15 +2,15 @@
 import InputForm from "@/components/InputForm.vue"
 import axios from "axios"
 import { useRouter } from "vue-router"
-import { useStore } from "vuex"
+import {useStore} from '@/stores/store.js'
 
 const router = useRouter()
 const store = useStore()
 
 const submit = async (text) => {
     const response = await callChatGPTAPI(text)
-    store.dispatch("updateResponse", response)
-    store.dispatch("updateText", text)
+    store.setResponse(response)
+    store.setText(text)
     router.push({ name: "ResultView" })
 }
 
