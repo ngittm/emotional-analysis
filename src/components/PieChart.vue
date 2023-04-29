@@ -1,3 +1,6 @@
+<!-- このコンポーネントは、感情分析結果を円グラフとして表示するためのコンポーネントです。
+プロパティで渡された感情データをもとに、Chart.jsとvue-chartjsを使用して円グラフを描画します。-->
+
 <script setup>
 import { ref,defineProps } from "vue"
 import { Chart } from "chart.js/auto"

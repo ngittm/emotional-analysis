@@ -4,6 +4,6 @@ const text = "Other"
 
 <template>
     <v-container>
-        {{ text }}
+        <!-- マスタッシュ構文でテキスト展開してください -->
     </v-container>
 </template>

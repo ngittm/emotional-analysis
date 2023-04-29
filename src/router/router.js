@@ -1,7 +1,6 @@
 import { createRouter,createWebHistory } from "vue-router"
 import InputView from "@/views/InputView.vue"
-import ResultView from "@/views/ResultView.vue"
-import OtherView from "@/views/OtherView.vue"
+// viewsにあるviewをimportしてください
 
 const routes = [
     {
@@ -9,16 +8,7 @@ const routes = [
         name:"InputView",
         component:InputView,
     },
-    {
-        path:"/result",
-        name:"ResultView",
-        component:ResultView,
-    },
-    {
-        path:"/other",
-        name:"OtherView",
-        component:OtherView,
-    }
+    // こちらに他2つのviewのpath,name,componentを設定してください
 ]
 const router = createRouter({
     history:createWebHistory(),

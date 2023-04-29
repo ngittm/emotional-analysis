@@ -1,3 +1,6 @@
+<!-- このコンポーネントは、ユーザーが感情分析を行いたいテキストを入力するためのフォームを提供します。
+    submit関数が、入力されたテキストを親コンポーネント（InputView.vue）に送信するために使用されます。 -->
+
 <script setup>
 import { ref, defineEmits, computed } from "vue"
 const loading = ref(false)
@@ -5,14 +8,14 @@ const MAX_LENGTH = 300
 const rules = [
     (value) => !/[<>;]/.test(value) || "不正な文字が含まれています",
     (value) => value.length <= MAX_LENGTH || `$(MAX_LENGTH)文字以内で入力してください`,
-    (value) => value.length != 0 || "必須の入力項目です"
+    // ここに必須の入力項目のルールを追加してください。0か否かを判断する必要があります
 ]
 const text = ref("")
 const emit = defineEmits({"submit":(payload) => typeof payload === "string"})
 const submit = () => {
     if(text.value) {
         loading.value = true
-        emit("submit",text.value)
+        // emit()でsubmitイベントを親にemitしてください.text.valueも送ってください
     } else {
         loading.value = false
     }
